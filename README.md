@@ -24,15 +24,12 @@ definitions:
     - step: &nobleo-pre-commit
         name: Pre-commit
         image: salcatroppa/pre-commit
-        caches:
-          - pre-commit
-        script:
-          - pre-commit run --all-files --verbose
+        caches: [pre-commit]
+        script: [pre-commit run --all-files --verbose]
 
 pipelines:
   default:
-    - step:
-        <<: *nobleo-pre-commit
+    - step: *nobleo-pre-commit
 ```
 
 ## Development
