@@ -1,0 +1,5 @@
+-   id: nobleo-hooks
+    name: nobleo-hooks
+    language: script
+    entry: ./run-nobleo-hooks
+    require_serial: true

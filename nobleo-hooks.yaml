@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: end-of-file-fixer
+        exclude_types: [binary, image]
+      - id: trailing-whitespace
+        exclude_types: [binary, image]
+  - repo: https://github.com/tier4/pre-commit-hooks-ros
+    rev: v0.8.0
+    hooks:
+      - id: sort-package-xml
