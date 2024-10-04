@@ -40,3 +40,12 @@ repos:
     rev: v0.10.0
     hooks:
       - id: sort-package-xml
+  # Combination tool for Black-style formatting, flake8, isort etc for python files:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.6
+    hooks:
+      # Linter.
+      - id: ruff
+        args: [ --fix ]
+      # Formatter.
+      - id: ruff-format
