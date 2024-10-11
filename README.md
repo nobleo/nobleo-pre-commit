@@ -24,7 +24,7 @@ definitions:
   steps:
     - step: &nobleo-pre-commit
         name: Pre-commit
-        image: salcatroppa/pre-commit
+        image: nobleo/pre-commit:4
         caches: [pre-commit]
         script: [pre-commit run --all-files --verbose]
 
