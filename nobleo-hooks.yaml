@@ -9,6 +9,32 @@ repos:
         exclude_types: [binary, image]
       - id: trailing-whitespace
         exclude_types: [binary, image]
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v19.1.1
+    hooks:
+    - id: clang-format
+      args:
+        - -i
+        - | # Identical to: https://github.com/ament/ament_lint/blob/HEAD/ament_clang_format/ament_clang_format/configuration/.clang-format
+          --style={
+            BasedOnStyle: Google,
+            AccessModifierOffset: -2,
+            AlignAfterOpenBracket: AlwaysBreak,
+            BraceWrapping: {
+              AfterClass: true,
+              AfterFunction: true,
+              AfterNamespace: true,
+              AfterStruct: true,
+              AfterEnum: true
+            },
+            BreakBeforeBraces: Custom,
+            ColumnLimit: 100,
+            ConstructorInitializerIndentWidth: 0,
+            ContinuationIndentWidth: 2,
+            DerivePointerAlignment: false,
+            PointerAlignment: Middle,
+            ReflowComments: false
+          }
   - repo: https://github.com/tier4/pre-commit-hooks-ros
     rev: v0.10.0
     hooks:
