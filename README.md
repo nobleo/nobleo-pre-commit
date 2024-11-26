@@ -15,7 +15,24 @@ repos:
       verbose: true
 ```
 
-And something like this to your CI:
+### Automatically run on commit
+
+If you like your code to be formatted according to the pre-commit configuration on every commit, you can install the pre-commit package and configure it to run on every commit.
+
+```bash
+apt install pre-commit
+```
+
+In a repository where there is a `.pre-commit-config.yaml` file, run the following command:
+
+```bash
+pre-commit install
+```
+Note that this command has to be repeated for every repository.
+
+### CI
+
+For bitbucket pipelines, add something like this to your `bitbucket-pipelines.yml` file:
 
 ```yaml
 definitions:
