@@ -49,3 +49,4 @@ repos:
         args: [ --fix ]
       # Formatter.
       - id: ruff-format
+        args: [ --config, "line-length = 99", --config, "format.quote-style = 'single'" ]
