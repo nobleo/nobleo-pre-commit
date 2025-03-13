@@ -1,4 +1,8 @@
 repos:
+  - repo: https://bitbucket.org/nobleo/nobleo-pre-commit
+    rev: 0f7a458b8eb7c1a9ba1682435611817b96b2520a
+    hooks:
+      - id: bumpver
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:

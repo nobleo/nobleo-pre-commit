@@ -1,5 +1,16 @@
--   id: nobleo-hooks
-    name: nobleo-hooks
-    language: script
-    entry: ./run-nobleo-hooks
-    require_serial: true
+# Hook containing all other hooks:
+- id: nobleo-hooks
+  name: nobleo-hooks
+  language: script
+  entry: ./run-nobleo-hooks
+  require_serial: true
+
+# Custom hooks:
+- id: bumpver
+  name: bumpver
+  description: All versions in the project should be aligned
+  language: python
+  additional_dependencies: [bumpver]
+  types: [text]
+  pass_filenames: false
+  entry: verify-bumpver

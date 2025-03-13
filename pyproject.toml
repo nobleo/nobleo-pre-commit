@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nobleo-pre-commit"
+version = "25.2.0"
+description = "Pre-commit hooks for Nobleo"
+dependencies = ["bumpver", "click"]
+
+[project.scripts]
+verify-bumpver = "pre_commit_hooks.verify_bumpver:main"
