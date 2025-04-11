@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nobleo-pre-commit"
-version = "25.2.0"
+version = "25.4.0"
 description = "Pre-commit hooks for Nobleo"
 dependencies = ["bumpver", "click"]
 
