@@ -50,7 +50,7 @@ repos:
     hooks:
       # Linter.
       - id: ruff
-        args: [ --fix ]
+        args: [--fix, --select, I]  # With Isort
       # Formatter.
       - id: ruff-format
         args: [ --config, "line-length = 99", --config, "format.quote-style = 'single'" ]
