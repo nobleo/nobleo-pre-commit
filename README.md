@@ -50,6 +50,19 @@ pipelines:
     - step: *nobleo-pre-commit
 ```
 
+For GitLab pipelines, you can use the following:
+
+```yaml
+pre-commit:
+  image: nobleo/pre-commit:4
+  cache:
+    key: "pre-commit"
+    paths:
+      - ~/.cache/pre-commit
+  script:
+    - pre-commit run --all-files --verbose
+```
+
 ## Development
 
 To test the pre-commit configuration, run the following command:
