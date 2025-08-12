@@ -1,10 +1,10 @@
 repos:
   - repo: https://bitbucket.org/nobleo/nobleo-pre-commit
-    rev: 0f7a458b8eb7c1a9ba1682435611817b96b2520a
+    rev: 25.4.0
     hooks:
       - id: bumpver
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-json
       - id: check-xml
@@ -14,7 +14,7 @@ repos:
       - id: trailing-whitespace
         exclude_types: [binary, image]
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v19.1.1
+    rev: v19.1.7
     hooks:
     - id: clang-format
       args:
@@ -39,17 +39,17 @@ repos:
             PointerAlignment: Middle,
             ReflowComments: false
           }
-      exclude: \.ipynb$  # Until: https://github.com/pre-commit/mirrors-clang-format/pull/33
+      exclude: \.ipynb$  # Until: https://github.com/pre-commit/mirrors-clang-format/pull/33 (LLVM v21.1.0)
   - repo: https://github.com/tier4/pre-commit-hooks-ros
     rev: v0.10.0
     hooks:
       - id: sort-package-xml
   # Combination tool for Black-style formatting, flake8, isort etc for python files:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.6
+    rev: v0.12.8
     hooks:
       # Linter.
-      - id: ruff
+      - id: ruff-check
         args: [--fix, --select, I]  # With Isort
       # Formatter.
       - id: ruff-format
