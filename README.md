@@ -9,7 +9,7 @@ To use this pre-commit configuration, add the following to your `.pre-commit-con
 ```yaml
 repos:
   - repo: https://bitbucket.org/nobleo/nobleo-pre-commit
-    rev: 25.4.0
+    rev: 25.8.0
     hooks:
     - id: nobleo-hooks
       verbose: true
