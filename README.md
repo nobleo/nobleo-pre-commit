@@ -28,9 +28,12 @@ In a repository where there is a `.pre-commit-config.yaml` file, run the followi
 ```bash
 pre-commit install
 ```
+
 Note that this command has to be repeated for every repository.
 
 ### CI
+
+#### Bitbucket
 
 For bitbucket pipelines, add something like this to your `bitbucket-pipelines.yml` file:
 
@@ -50,6 +53,30 @@ pipelines:
     - step: *nobleo-pre-commit
 ```
 
+#### Github
+
+For GitHub actions, add a file named `.github/workflows/pre-commit.yml`:
+
+```yaml
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-python@v6
+    - uses: pre-commit/action@v3.0.1
+      with:
+        extra_args: --all-files --verbose
+```
+
+#### GitLab
+
 For GitLab pipelines, you can use the following:
 
 ```yaml
@@ -61,6 +88,33 @@ pre-commit:
       - ~/.cache/pre-commit
   script:
     - pre-commit run --all-files --verbose
+```
+
+#### Azure DevOps
+
+For Azure DevOps pipelines, you can use the following:
+
+```yaml
+trigger:
+  - '*'
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  PRE_COMMIT_HOME: $(Pipeline.Workspace)/pre-commit
+
+jobs:
+  - job: PreCommit
+    container: nobleo/pre-commit:4
+    steps:
+      - task: Cache@2
+        inputs:
+          key: pre-commit
+          path: $(PRE_COMMIT_HOME)
+      - script: |
+          pre-commit run --all-files --verbose
+        displayName: 'Run pre-commit'
 ```
 
 ## Development
