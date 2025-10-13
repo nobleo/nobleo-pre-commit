@@ -83,11 +83,11 @@ For GitLab pipelines, you can use the following:
 pre-commit:
   image: nobleo/pre-commit:4
   variables:
-    PRE_COMMIT_HOME: ${CI_PROJECT_DIR}/.cache/pre-commit
+    PRE_COMMIT_HOME: "${CI_PROJECT_DIR}/.cache/pre-commit"
   cache:
     key: "pre-commit"
     paths:
-      - ${PRE_COMMIT_HOME}
+      - "${PRE_COMMIT_HOME}"
   script:
     - pre-commit run --all-files --verbose
 ```
