@@ -1,14 +1,9 @@
-FROM python:3
-
-ENV VIRTUAL_ENV=/opt/venv
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+FROM python:3-slim
 
 RUN apt-get update -qq \
-    && apt-get install -qqy \
-        build-essential \
+    && apt-get install -qqy --no-install-recommends \
         git \
-    && apt-get clean \
-    && python3 -m venv "$VIRTUAL_ENV" \
+    && rm -rf /var/lib/apt/lists \
     && pip install --no-cache-dir "pre-commit>=4,<5"
 
 LABEL org.opencontainers.image.description="pre-commit Docker image"
