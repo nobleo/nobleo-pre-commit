@@ -14,3 +14,12 @@
   types: [text]
   pass_filenames: false
   entry: verify-bumpver
+
+- id: launch-depends
+  name: launch-depends
+  description: Verify that all launch dependencies are listed in package.xml
+  language: python
+  types: [xml]
+  files: \.launch\.xml$
+  pass_filenames: true
+  entry: verify-launch-depends

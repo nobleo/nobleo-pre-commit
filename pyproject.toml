@@ -10,3 +10,4 @@ dependencies = ["bumpver", "click"]
 
 [project.scripts]
 verify-bumpver = "pre_commit_hooks.verify_bumpver:main"
+verify-launch-depends = "pre_commit_hooks.verify_launch_depends:main"
