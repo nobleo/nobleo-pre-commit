@@ -80,9 +80,6 @@ def verify_launch_file(launch_file: Path) -> list[str]:
     """
     errors = []
 
-    # Resolve to absolute path
-    launch_file = launch_file.resolve()
-
     try:
         package_xml = find_package_xml(launch_file)
     except FileNotFoundError as e:
@@ -95,10 +92,9 @@ def verify_launch_file(launch_file: Path) -> list[str]:
     missing = referenced_pkgs - declared_deps
 
     if missing:
-        rel_launch = launch_file.relative_to(package_xml.parent)
         for pkg in sorted(missing):
             errors.append(
-                f"{rel_launch}: Package '{pkg}' is referenced but not declared "
+                f"{launch_file}: Package '{pkg}' is referenced but not declared "
                 f"as <depend>, <exec_depend> or <test_depend> in {package_xml.name}"
             )
 
@@ -110,7 +106,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Verify that all packages in ROS2 launch files are declared as dependencies"
     )
-    parser.add_argument("filenames", nargs="*", help="Launch files to check (*.launch.xml)")
+    parser.add_argument(
+        "filenames", nargs="*", type=Path, help="Launch files to check (*.launch.xml)"
+    )
 
     args = parser.parse_args()
 
@@ -118,9 +116,7 @@ def main() -> int:
         return 0
 
     all_ok = True
-    for filename in args.filenames:
-        launch_file = Path(filename)
-
+    for launch_file in args.filenames:
         # Only process .launch.xml files
         if not launch_file.name.endswith(".launch.xml"):
             continue
