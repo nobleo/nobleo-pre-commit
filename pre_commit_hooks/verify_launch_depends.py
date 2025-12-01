@@ -67,11 +67,11 @@ def extract_packages_from_launch(launch_file: Path) -> set[str]:
     xml_str = ET.tostring(root, encoding='unicode')
 
     # Pattern for $(find_pkg_share pkg_name) or $(find-pkg-share pkg_name) format used in ROS2 launch files
-    # Both underscore and hyphen variants are used
-    find_pkg_pattern_ros2 = r"\$\(find[-_]pkg[-_]share\s+([^\)]+)\)"
+    # Package names must be valid identifiers (letters, digits, underscores, hyphens),
+    # ignoring other characters in case variable substitution is used
+    find_pkg_pattern_ros2 = r"\$\(find[-_]pkg[-_]share\s+([a-zA-Z0-9_-]+)\)"
     for match in re.finditer(find_pkg_pattern_ros2, xml_str):
-        pkg = match.group(1).strip().strip("'\"")
-        pkgs.add(pkg)
+        pkgs.add(match.group(1))
 
     return pkgs
 
