@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+# Copyright (C) 2025 Nobleo Autonomous Solutions B.V.
+
 """Verify that all packages referenced in ROS2 launch files are declared as dependencies."""
 
 import argparse

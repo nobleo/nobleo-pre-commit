@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+# Copyright (C) 2025 Nobleo Autonomous Solutions B.V.
+
 from bumpver.cli import cli
 from click.testing import CliRunner
 

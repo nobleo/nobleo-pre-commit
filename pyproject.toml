@@ -1,3 +1,5 @@
+# Copyright (C) 2025 Nobleo Autonomous Solutions B.V.
+
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"

@@ -1,3 +1,7 @@
+<!--
+Copyright (C) 2025 Nobleo Autonomous Solutions B.V.
+-->
+
 # nobleo-pre-commit
 
 This repository contains a pre-commit configuration that can be re-used in multiple projects.

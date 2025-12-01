@@ -1,3 +1,5 @@
+# Copyright (C) 2025 Nobleo Autonomous Solutions B.V.
+
 FROM python:3-slim
 
 RUN apt-get update -qq \

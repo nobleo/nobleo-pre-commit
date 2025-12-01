@@ -1,3 +1,5 @@
+# Copyright (C) 2025 Nobleo Autonomous Solutions B.V.
+
 # Hook containing all other hooks:
 - id: nobleo-hooks
   name: nobleo-hooks
