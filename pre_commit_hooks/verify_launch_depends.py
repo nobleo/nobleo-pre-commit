@@ -57,7 +57,7 @@ def extract_packages_from_launch(launch_file: Path) -> set[str]:
         return pkgs
 
     # Find all node elements and extract pkg attribute
-    for node in root.findall(".//node"):
+    for node in root.findall(".//node") + root.findall(".//composable_node"):
         pkg = node.get("pkg")
         if pkg:
             pkgs.add(pkg)
