@@ -56,8 +56,8 @@ def extract_packages_from_launch(launch_file: Path) -> set[str]:
         print(f"Error parsing {launch_file}: {e}", file=sys.stderr)
         return pkgs
 
-    # Find all node elements and extract pkg attribute
-    for node in root.findall(".//node"):
+    # Find all (composable_)node elements and extract pkg attribute
+    for node in root.findall(".//node") + root.findall(".//composable_node"):
         pkg = node.get("pkg")
         if pkg:
             pkgs.add(pkg)
