@@ -71,7 +71,10 @@ def extract_packages_from_launch(launch_file: Path) -> set[str]:
     # ignoring other characters in case variable substitution is used
     find_pkg_pattern_ros2 = r"\$\(find[-_]pkg[-_]share\s+([a-zA-Z0-9_-]+)\)"
     for match in re.finditer(find_pkg_pattern_ros2, xml_str):
-        pkgs.add(match.group(1))
+        pkg = match.group(1)
+        if '$' in pkg:
+            continue  # Skip if package name contains variable substitution
+        pkgs.add(pkg)
 
     return pkgs
 
