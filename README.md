@@ -19,6 +19,16 @@ repos:
       verbose: true
 ```
 
+To use only specific hooks, you can specify them like this:
+
+```yaml
+repos:
+  - repo: https://bitbucket.org/nobleo/nobleo-pre-commit
+    rev: 25.12.0
+    hooks:
+    - id: launch-depends
+```
+
 ### Automatically run on commit
 
 If you like your code to be formatted according to the pre-commit configuration on every commit, you can install the pre-commit package and configure it to run on every commit.
