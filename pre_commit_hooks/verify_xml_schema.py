@@ -84,6 +84,9 @@ def main() -> int:
         try:
             schema = xmlschema.XMLSchema(schema_url)
             schema.validate(str(filepath))
+        except xmlschema.XMLSchemaValidationError as e:
+            all_ok = False
+            print(f'{filepath}: {e.reason} (path: {e.path})')
         except xmlschema.XMLSchemaException as e:
             all_ok = False
             print(f'{filepath}: {e}')
