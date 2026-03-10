@@ -45,6 +45,13 @@ pre-commit install
 
 Note that this command has to be repeated for every repository.
 
+### Manual run before commit
+
+```bash
+pre-commit run  # On your staged files
+pre-commit run --all-files  # On all files
+```
+
 ### CI
 
 #### Bitbucket
