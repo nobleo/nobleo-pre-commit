@@ -67,9 +67,6 @@ def main() -> int:
     parser.add_argument('filenames', nargs='*', type=Path, help='XML files to check')
     args = parser.parse_args()
 
-    if not args.filenames:
-        return 0
-
     all_ok = True
     for filepath in args.filenames:
         if not filepath.exists():
