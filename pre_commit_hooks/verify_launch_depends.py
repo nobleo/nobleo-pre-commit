@@ -16,11 +16,11 @@ def find_package_xml(launch_file: Path) -> Path:
     # Resolve to absolute path
     current = launch_file.resolve().parent
     while current != current.parent:
-        package_xml = current / "package.xml"
+        package_xml = current / 'package.xml'
         if package_xml.exists():
             return package_xml
         current = current.parent
-    raise FileNotFoundError(f"Could not find package.xml for {launch_file}")
+    raise FileNotFoundError(f'Could not find package.xml for {launch_file}')
 
 
 def parse_package_xml(package_xml: Path) -> set[str]:
@@ -32,16 +32,16 @@ def parse_package_xml(package_xml: Path) -> set[str]:
         dependencies = set()
         # Look for valid dependencies
         for dep in (
-            root.findall(".//name")
-            + root.findall(".//depend")
-            + root.findall(".//exec_depend")
-            + root.findall(".//test_depend")
+            root.findall('.//name')
+            + root.findall('.//depend')
+            + root.findall('.//exec_depend')
+            + root.findall('.//test_depend')
         ):
             if dep.text:
                 dependencies.add(dep.text.strip())
         return dependencies
     except ET.ParseError as e:
-        print(f"Error parsing {package_xml}: {e}", file=sys.stderr)
+        print(f'Error parsing {package_xml}: {e}', file=sys.stderr)
         return set()
 
 
@@ -53,12 +53,12 @@ def extract_packages_from_launch(launch_file: Path) -> set[str]:
         tree = ET.parse(launch_file)
         root = tree.getroot()
     except ET.ParseError as e:
-        print(f"Error parsing {launch_file}: {e}", file=sys.stderr)
+        print(f'Error parsing {launch_file}: {e}', file=sys.stderr)
         return pkgs
 
     # Find all (composable_)node elements and extract pkg attribute
-    for node in root.findall(".//node") + root.findall(".//composable_node"):
-        pkg = node.get("pkg")
+    for node in root.findall('.//node') + root.findall('.//composable_node'):
+        pkg = node.get('pkg')
         if pkg:
             pkgs.add(pkg)
 
@@ -69,7 +69,7 @@ def extract_packages_from_launch(launch_file: Path) -> set[str]:
     # Pattern for $(find_pkg_share pkg_name) or $(find-pkg-share pkg_name) format used in ROS2 launch files
     # Package names must be valid identifiers (letters, digits, underscores, hyphens),
     # ignoring other characters in case variable substitution is used
-    find_pkg_pattern_ros2 = r"\$\(find[-_]pkg[-_]share\s+([a-zA-Z0-9_-]+)\)"
+    find_pkg_pattern_ros2 = r'\$\(find[-_]pkg[-_]share\s+([a-zA-Z0-9_-]+)\)'
     for match in re.finditer(find_pkg_pattern_ros2, xml_str):
         pkg = match.group(1)
         if '$' in pkg:
@@ -101,7 +101,7 @@ def verify_launch_file(launch_file: Path) -> list[str]:
         for pkg in sorted(missing):
             errors.append(
                 f"{launch_file}: Package '{pkg}' is referenced but not declared "
-                f"as <depend>, <exec_depend> or <test_depend> in {package_xml.name}"
+                f'as <depend>, <exec_depend> or <test_depend> in {package_xml.name}'
             )
 
     return errors
@@ -110,10 +110,10 @@ def verify_launch_file(launch_file: Path) -> list[str]:
 def main() -> int:
     """Main entry point for the pre-commit hook."""
     parser = argparse.ArgumentParser(
-        description="Verify that all packages in ROS2 launch files are declared as dependencies"
+        description='Verify that all packages in ROS2 launch files are declared as dependencies'
     )
     parser.add_argument(
-        "filenames", nargs="*", type=Path, help="Launch files to check (*.launch.xml)"
+        'filenames', nargs='*', type=Path, help='Launch files to check (*.launch.xml)'
     )
 
     args = parser.parse_args()
@@ -124,11 +124,11 @@ def main() -> int:
     all_ok = True
     for launch_file in args.filenames:
         # Only process .launch.xml files
-        if not launch_file.name.endswith(".launch.xml"):
+        if not launch_file.name.endswith('.launch.xml'):
             continue
 
         if not launch_file.exists():
-            print(f"File not found: {launch_file}", file=sys.stderr)
+            print(f'File not found: {launch_file}', file=sys.stderr)
             all_ok = False
             continue
 
