@@ -3,7 +3,7 @@
 # Let's make sure we fullfill the pre-commit requirements ourselves in this repository
 repos:
   - repo: https://bitbucket.org/nobleo/nobleo-pre-commit
-    rev: 24.9.0
+    rev: 26.1.0
     hooks:
     - id: nobleo-hooks
       verbose: true
