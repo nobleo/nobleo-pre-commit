@@ -25,3 +25,12 @@
   files: \.launch\.xml$
   pass_filenames: true
   entry: verify-launch-depends
+
+- id: xml-schema
+  name: xml-schema
+  description: Validate XML files against their declared XSD schema
+  language: python
+  additional_dependencies: [xmlschema]
+  types: [xml]
+  pass_filenames: true
+  entry: verify-xml-schema

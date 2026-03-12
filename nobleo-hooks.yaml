@@ -2,10 +2,11 @@
 
 repos:
   - repo: https://bitbucket.org/nobleo/nobleo-pre-commit
-    rev: 26.1.0
+    rev: e965aeb
     hooks:
       - id: bumpver
       - id: launch-depends
+      - id: xml-schema
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
