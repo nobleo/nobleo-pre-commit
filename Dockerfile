@@ -9,4 +9,4 @@ RUN apt-get update -qq \
     && pip install --no-cache-dir "pre-commit>=4,<5"
 
 LABEL org.opencontainers.image.description="pre-commit Docker image"
-LABEL org.opencontainers.image.source=https://bitbucket.org/nobleo/nobleo-pre-commit
+LABEL org.opencontainers.image.source=https://github.com/nobleo/nobleo-pre-commit

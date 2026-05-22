@@ -12,7 +12,7 @@ To use this pre-commit configuration, add the following to your `.pre-commit-con
 
 ```yaml
 repos:
-  - repo: https://bitbucket.org/nobleo/nobleo-pre-commit
+  - repo: https://github.com/nobleo/nobleo-pre-commit
     rev: 26.3.0
     hooks:
     - id: nobleo-hooks
@@ -23,7 +23,7 @@ To use only specific hooks, you can specify them like this:
 
 ```yaml
 repos:
-  - repo: https://bitbucket.org/nobleo/nobleo-pre-commit
+  - repo: https://github.com/nobleo/nobleo-pre-commit
     rev: 26.3.0
     hooks:
     - id: launch-depends
