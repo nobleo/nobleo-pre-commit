@@ -30,6 +30,18 @@ repos:
     - id: xml-schema
 ```
 
+To skip specific hooks, use the `--skip` argument.
+For example if a different formatter is already configured.
+
+```yaml
+repos:
+  - repo: https://github.com/nobleo/nobleo-pre-commit
+    rev: 26.3.0
+    hooks:
+    - id: nobleo-hooks
+      args: [--skip, clang-format, --skip, check-json]
+```
+
 ### Automatically run on commit
 
 If you like your code to be formatted according to the pre-commit configuration on every commit, you can install the pre-commit package and configure it to run on every commit.
