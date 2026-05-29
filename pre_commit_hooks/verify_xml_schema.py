@@ -9,8 +9,16 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.parse import urlparse
 
 import xmlschema
+
+
+def absolute_url(url: str, base_path: Path) -> str:
+    """Convert a relative URL to an absolute URL based on the base path."""
+    if urlparse(url).scheme:
+        return url
+    return str(base_path.parent / url)
 
 
 def find_schema_url(filepath: Path) -> str | None:
@@ -79,7 +87,7 @@ def main() -> int:
             continue
 
         try:
-            schema = xmlschema.XMLSchema(schema_url)
+            schema = xmlschema.XMLSchema(absolute_url(schema_url, filepath))
             schema.validate(str(filepath))
         except xmlschema.XMLSchemaValidationError as e:
             all_ok = False
