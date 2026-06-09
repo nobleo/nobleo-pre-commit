@@ -27,6 +27,7 @@ repos:
     rev: 26.6.0
     hooks:
     - id: launch-depends
+    - id: xml-schema
 ```
 
 ### Automatically run on commit
