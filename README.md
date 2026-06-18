@@ -26,8 +26,8 @@ repos:
   - repo: https://github.com/nobleo/nobleo-pre-commit
     rev: 26.6.0
     hooks:
-    - id: launch-depends
-    - id: xml-schema
+      - id: launch-depends
+      - id: xml-schema
 ```
 
 To skip specific hooks, use the `--skip` argument.
@@ -38,8 +38,8 @@ repos:
   - repo: https://github.com/nobleo/nobleo-pre-commit
     rev: 26.3.0
     hooks:
-    - id: nobleo-hooks
-      args: [--skip, clang-format, --skip, check-json]
+      - id: nobleo-hooks
+        args: [--skip, clang-format, --skip, check-json]
 ```
 
 ### Automatically run on commit
@@ -102,11 +102,11 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
-    - uses: actions/setup-python@v6
-    - uses: pre-commit/action@v3.0.1
-      with:
-        extra_args: --all-files --verbose
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+      - uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --all-files --verbose
 ```
 
 #### GitLab
