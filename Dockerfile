@@ -4,7 +4,7 @@ FROM python:3-slim
 
 RUN apt-get update -qq \
     && apt-get install -qqy --no-install-recommends \
-        git \
+        git git-lfs \
     && rm -rf /var/lib/apt/lists \
     && pip install --no-cache-dir "pre-commit>=4,<5"
 
