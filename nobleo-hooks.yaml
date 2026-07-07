@@ -58,3 +58,13 @@ repos:
       # Formatter.
       - id: ruff-format
         args: [ --config, "line-length = 99", --config, "format.quote-style = 'single'" ]
+  # Shell linters
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.13.1-1
+    hooks:
+      - id: shfmt
+        args: [--indent, "2"]
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.11.0
+    hooks:
+    -   id: shellcheck
