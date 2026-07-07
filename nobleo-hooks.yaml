@@ -63,7 +63,7 @@ repos:
     rev: v3.13.1-1
     hooks:
       - id: shfmt
-        args: [--indent, "2"]
+        args: [--indent, "4", --write]
   - repo: https://github.com/koalaman/shellcheck-precommit
     rev: v0.11.0
     hooks:
