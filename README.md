@@ -13,7 +13,7 @@ To use this pre-commit configuration, add the following to your `.pre-commit-con
 ```yaml
 repos:
   - repo: https://github.com/nobleo/nobleo-pre-commit
-    rev: 26.6.1
+    rev: 26.7.0
     hooks:
     - id: nobleo-hooks
       verbose: true
@@ -24,7 +24,7 @@ To use only specific hooks, you can specify them like this:
 ```yaml
 repos:
   - repo: https://github.com/nobleo/nobleo-pre-commit
-    rev: 26.6.1
+    rev: 26.7.0
     hooks:
       - id: launch-depends
       - id: xml-schema
@@ -36,7 +36,7 @@ For example if a different formatter is already configured.
 ```yaml
 repos:
   - repo: https://github.com/nobleo/nobleo-pre-commit
-    rev: 26.6.1
+    rev: 26.7.0
     hooks:
       - id: nobleo-hooks
         args: [--skip, clang-format, --skip, check-json]
