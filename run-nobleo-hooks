@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import os
+import shutil
 
 HERE = os.path.dirname(os.path.realpath(__file__))
 
@@ -16,8 +17,10 @@ def main():
         skips = [s for s in existing.split(',') if s] + args.skip
         os.environ['SKIP'] = ','.join(skips)
 
+    # Use prek if available
+    runner = shutil.which('prek') or 'pre-commit'
     cfg = os.path.join(HERE, 'nobleo-hooks.yaml')
-    cmd = ['pre-commit', 'run', '--config', cfg, '--files'] + args.files
+    cmd = [runner, 'run', '--config', cfg, '--files'] + args.files
     os.execvp(cmd[0], cmd)
 
 
