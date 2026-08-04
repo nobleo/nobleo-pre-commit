@@ -20,30 +20,30 @@ repos:
   - repo: https://github.com/pre-commit/mirrors-clang-format
     rev: v19.1.7
     hooks:
-    - id: clang-format
-      args:
-        - -i
-        - | # Identical to: https://github.com/ament/ament_lint/blob/HEAD/ament_clang_format/ament_clang_format/configuration/.clang-format
-          --style={
-            BasedOnStyle: Google,
-            AccessModifierOffset: -2,
-            AlignAfterOpenBracket: AlwaysBreak,
-            BraceWrapping: {
-              AfterClass: true,
-              AfterFunction: true,
-              AfterNamespace: true,
-              AfterStruct: true,
-              AfterEnum: true
-            },
-            BreakBeforeBraces: Custom,
-            ColumnLimit: 100,
-            ConstructorInitializerIndentWidth: 0,
-            ContinuationIndentWidth: 2,
-            DerivePointerAlignment: false,
-            PointerAlignment: Middle,
-            ReflowComments: false
-          }
-      exclude: \.ipynb$  # Until: https://github.com/pre-commit/mirrors-clang-format/pull/33 (LLVM v21.1.0)
+      - id: clang-format
+        args:
+          - -i
+          - | # Identical to: https://github.com/ament/ament_lint/blob/HEAD/ament_clang_format/ament_clang_format/configuration/.clang-format
+            --style={
+              BasedOnStyle: Google,
+              AccessModifierOffset: -2,
+              AlignAfterOpenBracket: AlwaysBreak,
+              BraceWrapping: {
+                AfterClass: true,
+                AfterFunction: true,
+                AfterNamespace: true,
+                AfterStruct: true,
+                AfterEnum: true
+              },
+              BreakBeforeBraces: Custom,
+              ColumnLimit: 100,
+              ConstructorInitializerIndentWidth: 0,
+              ContinuationIndentWidth: 2,
+              DerivePointerAlignment: false,
+              PointerAlignment: Middle,
+              ReflowComments: false
+            }
+        exclude: \.ipynb$  # Until: https://github.com/pre-commit/mirrors-clang-format/pull/33 (LLVM v21.1.0)
   - repo: https://github.com/tier4/pre-commit-hooks-ros
     rev: v0.10.0
     hooks:
@@ -57,13 +57,13 @@ repos:
         args: [--fix, --select, I]  # With Isort
       # Formatter.
       - id: ruff-format
-        args: [ --config, "line-length = 99", --config, "format.quote-style = 'single'" ]
+        args: [--config, line-length = 99, --config, format.quote-style = 'single']
   # Shell linters
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.13.1-1
     hooks:
       - id: shfmt
-        args: [--indent, "2", --write]
+        args: [--indent, '4', --write]
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
