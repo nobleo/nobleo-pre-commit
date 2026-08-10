@@ -87,6 +87,23 @@ pipelines:
     - step: *nobleo-pre-commit
 ```
 
+Or, for the ones who prefere [prek](https://prek.j178.dev/):
+```yaml
+definitions:
+  caches:
+    prek: ~/.cache/prek
+  steps:
+    - step: &nobleo-prek
+        name: Prek
+        image: nobleo/pre-commit:4
+        caches: [prek]
+        script: [prek run --all-files --verbose]
+
+pipelines:
+  default:
+    - step: *nobleo-prek
+```
+
 #### Github
 
 For GitHub actions, add a file named `.github/workflows/pre-commit.yml`:
