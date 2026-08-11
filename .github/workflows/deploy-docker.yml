@@ -16,9 +16,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: |
-          docker_tag="4"
-          docker build . -t "nobleo/pre-commit:${docker_tag}"
-          docker push "nobleo/pre-commit:${docker_tag}"
+          docker build . -t "nobleo/pre-commit:4"
+          docker push "nobleo/pre-commit:4"
 
-          docker build . --build-arg RUNNER="prek" -t "nobleo/prek:${docker_tag}"
-          docker push "nobleo/prek:${docker_tag}"
+          prek_version=0.4.13
+          docker build . --build-arg RUNNER="prek==${prek_version}" -t "nobleo/prek:${prek_version}"
+          docker push "nobleo/prek:${prek_version}"
