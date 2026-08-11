@@ -95,7 +95,7 @@ definitions:
   steps:
     - step: &nobleo-prek
         name: Prek
-        image: nobleo/prek:4
+        image: nobleo/prek:0.4
         caches: [prek]
         script: [prek run --all-files --verbose]
 
