@@ -8,9 +8,13 @@ build-backend = "setuptools.build_meta"
 name = "nobleo-pre-commit"
 version = "26.8.0"
 description = "Pre-commit hooks for Nobleo"
-dependencies = ["bumpver", "click", "xmlschema"]
+dependencies = ["bumpver", "click", "xmlschema", "yamlfix"]
 
 [project.scripts]
+format-yaml = "pre_commit_hooks.format_yaml:main"
 verify-bumpver = "pre_commit_hooks.verify_bumpver:main"
 verify-launch-depends = "pre_commit_hooks.verify_launch_depends:main"
 verify-xml-schema = "pre_commit_hooks.verify_xml_schema:main"
+
+[tool.setuptools]
+packages = ["pre_commit_hooks"]

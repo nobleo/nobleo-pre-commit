@@ -15,6 +15,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - run: |
+      - run: |-
           docker build . -t "nobleo/pre-commit:4"
           docker push "nobleo/pre-commit:4"

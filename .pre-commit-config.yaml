@@ -5,13 +5,13 @@ repos:
   - repo: https://github.com/nobleo/nobleo-pre-commit
     rev: 26.1.0
     hooks:
-    - id: nobleo-hooks
-      verbose: true
+      - id: nobleo-hooks
+        verbose: true
   - repo: local
     hooks:
-    - id: copyright
-      name: Add missing copyright
-      language: python
-      additional_dependencies: [reuse]
-      entry: reuse annotate --copyright 'Nobleo Autonomous Solutions B.V.' --copyright-style string-c --skip-existing --skip-unrecognised
-      types: [text]
+      - id: copyright
+        name: Add missing copyright
+        language: python
+        additional_dependencies: [reuse]
+        entry: reuse annotate --copyright 'Nobleo Autonomous Solutions B.V.' --copyright-style string-c --skip-existing --skip-unrecognised
+        types: [text]

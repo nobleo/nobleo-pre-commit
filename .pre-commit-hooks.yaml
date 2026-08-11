@@ -34,3 +34,12 @@
   types: [xml]
   pass_filenames: true
   entry: verify-xml-schema
+
+- id: yaml-format
+  name: yaml-format
+  description: Format YAML files (no --- added, preserved if present)
+  language: python
+  additional_dependencies: [yamlfix]
+  types: [yaml]
+  pass_filenames: true
+  entry: format-yaml
