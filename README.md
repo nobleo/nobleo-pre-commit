@@ -87,7 +87,7 @@ pipelines:
     - step: *nobleo-pre-commit
 ```
 
-Or, for the ones who prefere [prek](https://prek.j178.dev/):
+Or, for the ones who prefer [prek](https://prek.j178.dev):
 ```yaml
 definitions:
   caches:
