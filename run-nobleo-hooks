@@ -18,9 +18,9 @@ def main():
         os.environ['SKIP'] = ','.join(skips)
 
     # Use prek if available
-    option = ""
+    option = ''
     if runner := shutil.which('prek'):
-        option = "--no-progress" # prevents manipulated shell output for nested runs
+        option = '--no-progress'  # prevents manipulated shell output for nested runs
     else:
         runner = 'pre-commit'
 
