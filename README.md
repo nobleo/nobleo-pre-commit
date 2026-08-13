@@ -97,7 +97,7 @@ definitions:
         name: Prek
         image: nobleo/prek:4
         caches: [prek]
-        script: [prek run --all-files --verbose]
+        script: [prek run --all-files --verbose --color always --show-diff-on-failure]
 
 pipelines:
   default:
