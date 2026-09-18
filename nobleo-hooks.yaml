@@ -18,7 +18,7 @@ repos:
       - id: trailing-whitespace
         exclude_types: [binary, image]
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v19.1.7
+    rev: v21.1.8  # Aligned with Lyrical
     hooks:
       - id: clang-format
         args:
