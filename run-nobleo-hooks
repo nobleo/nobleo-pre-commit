@@ -18,9 +18,12 @@ def main():
         os.environ['SKIP'] = ','.join(skips)
 
     # Use prek if available
-    runner = f'{r} --no-progress' if (r := shutil.which('prek')) else 'pre-commit'
     cfg = os.path.join(HERE, 'nobleo-hooks.yaml')
-    cmd = [runner, 'run', '--config', cfg, '--files'] + args.files
+    args = ['--config', cfg, '--files'] + args.files
+    if shutil.which('prek'):
+        cmd = ['prek', 'run', '--no-progress', '--hide-status', 'skipped'] + args
+    else:
+        cmd = ['pre-commit', 'run'] + args
     os.execvp(cmd[0], cmd)
 
 
