@@ -11,6 +11,6 @@ description = "Pre-commit hooks for Nobleo"
 dependencies = ["bumpver", "click", "xmlschema"]
 
 [project.scripts]
-verify-bumpver = "pre_commit_hooks.verify_bumpver:main"
-verify-launch-depends = "pre_commit_hooks.verify_launch_depends:main"
-verify-xml-schema = "pre_commit_hooks.verify_xml_schema:main"
+verify-bumpver = "nobleo_pre_commit.verify_bumpver:main"
+verify-launch-depends = "nobleo_pre_commit.verify_launch_depends:main"
+verify-xml-schema = "nobleo_pre_commit.verify_xml_schema:main"

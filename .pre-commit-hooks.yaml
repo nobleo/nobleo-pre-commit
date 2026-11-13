@@ -34,3 +34,135 @@
   types: [xml]
   pass_filenames: true
   entry: verify-xml-schema
+
+# Third-party tools (with the Nobleo configuration).
+# Versions are pinned in additional_dependencies and need to be bumped manually.
+
+# https://github.com/pre-commit/pre-commit-hooks/blob/v6.0.0/.pre-commit-hooks.yaml
+- id: check-json
+  name: check json
+  description: checks json files for parseable syntax.
+  language: python
+  additional_dependencies: [pre-commit-hooks==6.0.0]
+  entry: check-json
+  types: [json]
+
+- id: check-xml
+  name: check xml
+  description: checks xml files for parseable syntax.
+  language: python
+  additional_dependencies: [pre-commit-hooks==6.0.0]
+  entry: check-xml
+  types: [xml]
+
+- id: check-yaml
+  name: check yaml
+  description: checks yaml files for parseable syntax.
+  language: python
+  additional_dependencies: [pre-commit-hooks==6.0.0]
+  entry: check-yaml
+  types: [yaml]
+
+- id: end-of-file-fixer
+  name: fix end of files
+  description: ensures that a file is either empty, or ends with one newline.
+  language: python
+  additional_dependencies: [pre-commit-hooks==6.0.0]
+  entry: end-of-file-fixer
+  types: [text]
+  exclude_types: [binary, image]
+  stages: [pre-commit, pre-push, manual]
+  minimum_pre_commit_version: 3.2.0
+
+- id: trailing-whitespace
+  name: trim trailing whitespace
+  description: trims trailing whitespace.
+  language: python
+  additional_dependencies: [pre-commit-hooks==6.0.0]
+  entry: trailing-whitespace-fixer
+  types: [text]
+  exclude_types: [binary, image]
+  stages: [pre-commit, pre-push, manual]
+  minimum_pre_commit_version: 3.2.0
+
+# https://github.com/pre-commit/mirrors-clang-format/blob/v21.1.8/.pre-commit-hooks.yaml
+- id: clang-format
+  name: clang-format
+  description: Format C/C++ with the ament style
+  language: python
+  additional_dependencies: [clang-format==21.1.8]  # Aligned with Lyrical
+  entry: clang-format -i
+  types_or: [c++, c, c#, cuda, java, javascript, json, objective-c, proto, textproto, metal]
+  exclude: \.ipynb$  # Until: https://github.com/pre-commit/mirrors-clang-format/pull/33 (LLVM v21.1.0)
+  args:
+    - | # Identical to: https://github.com/ament/ament_lint/blob/HEAD/ament_clang_format/ament_clang_format/configuration/.clang-format
+      --style={
+        BasedOnStyle: Google,
+        AccessModifierOffset: -2,
+        AlignAfterOpenBracket: AlwaysBreak,
+        BraceWrapping: {
+          AfterClass: true,
+          AfterFunction: true,
+          AfterNamespace: true,
+          AfterStruct: true,
+          AfterEnum: true
+        },
+        BreakBeforeBraces: Custom,
+        ColumnLimit: 100,
+        ConstructorInitializerIndentWidth: 0,
+        ContinuationIndentWidth: 2,
+        DerivePointerAlignment: false,
+        PointerAlignment: Middle,
+        ReflowComments: false
+      }
+
+# https://github.com/tier4/pre-commit-hooks-ros/blob/v0.10.0/.pre-commit-hooks.yaml
+- id: sort-package-xml
+  name: sort package.xml
+  description: Sort the dependent packages in package.xml.
+  language: python
+  additional_dependencies: ['git+https://github.com/tier4/pre-commit-hooks-ros@v0.10.0']
+  entry: sort-package-xml
+  files: package.xml$
+
+# https://github.com/astral-sh/ruff-pre-commit/blob/v0.12.8/.pre-commit-hooks.yaml
+- id: ruff-check
+  name: ruff check
+  description: Lint python with ruff (with isort)
+  language: python
+  additional_dependencies: [ruff==0.12.8]
+  entry: ruff check --force-exclude
+  types_or: [python, pyi, jupyter]
+  require_serial: true
+  args: [--fix, --select, I]
+
+- id: ruff-format
+  name: ruff format
+  description: Format python with ruff (ROS2 flake style)
+  language: python
+  additional_dependencies: [ruff==0.12.8]
+  entry: ruff format --force-exclude
+  types_or: [python, pyi, jupyter]
+  require_serial: true
+  args: [--config, line-length = 99, --config, format.quote-style = 'single']
+
+# https://github.com/scop/pre-commit-shfmt/blob/v3.13.1-1/.pre-commit-hooks.yaml
+- id: shfmt
+  name: shfmt
+  description: Shell source code formatter
+  language: python
+  additional_dependencies: ['git+https://github.com/scop/pre-commit-shfmt@v3.13.1-1']
+  entry: shfmt
+  types: [shell]
+  exclude_types: [csh, tcsh]
+  args: [--indent, '4', --write]
+
+# https://github.com/shellcheck-py/shellcheck-py/blob/v0.11.0.1/.pre-commit-hooks.yaml
+- id: shellcheck
+  name: shellcheck
+  description: Test shell scripts with shellcheck
+  language: python
+  additional_dependencies: [shellcheck-py==0.11.0.1]
+  entry: shellcheck
+  types: [shell]
+  require_serial: true  # shellcheck can detect sourcing this way
