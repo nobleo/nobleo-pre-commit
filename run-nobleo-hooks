@@ -1,9 +1,34 @@
 #!/usr/bin/env python3
 import argparse
+import json
 import os
+import re
 import shutil
+import subprocess
+import tempfile
 
 HERE = os.path.dirname(os.path.realpath(__file__))
+META_HOOK = 'nobleo-hooks'
+
+
+def hook_ids():
+    """All hook ids defined in this repository, except this meta hook."""
+    with open(os.path.join(HERE, '.pre-commit-hooks.yaml')) as f:
+        ids = re.findall(r'^- id: (\S+)', f.read(), re.MULTILINE)
+    return [i for i in ids if i != META_HOOK]
+
+
+def write_config(path):
+    """Write a config that references this very checkout.
+
+    Pointing at our own HEAD avoids pinning a released rev of ourselves,
+    which would always lag one release behind (chicken-and-egg).
+    JSON is valid YAML, so no YAML library is needed.
+    """
+    rev = subprocess.check_output(['git', '-C', HERE, 'rev-parse', 'HEAD'], text=True).strip()
+    config = {'repos': [{'repo': HERE, 'rev': rev, 'hooks': [{'id': i} for i in hook_ids()]}]}
+    with open(path, 'w') as f:
+        json.dump(config, f, indent=2)
 
 
 def main():
@@ -17,14 +42,17 @@ def main():
         skips = [s for s in existing.split(',') if s] + args.skip
         os.environ['SKIP'] = ','.join(skips)
 
-    # Use prek if available
-    cfg = os.path.join(HERE, 'nobleo-hooks.yaml')
-    args = ['--config', cfg, '--files'] + args.files
-    if shutil.which('prek'):
-        cmd = ['prek', 'run', '--no-progress', '--hide-status', 'skipped'] + args
-    else:
-        cmd = ['pre-commit', 'run'] + args
-    os.execvp(cmd[0], cmd)
+    with tempfile.TemporaryDirectory(prefix='nobleo-hooks-') as tmp:
+        cfg = os.path.join(tmp, 'nobleo-hooks.yaml')
+        write_config(cfg)
+
+        # Use prek if available
+        run_args = ['--config', cfg, '--files'] + args.files
+        if shutil.which('prek'):
+            cmd = ['prek', 'run', '--no-progress', '--hide-status', 'skipped'] + run_args
+        else:
+            cmd = ['pre-commit', 'run'] + run_args
+        return subprocess.call(cmd)
 
 
 if __name__ == '__main__':

@@ -28,7 +28,12 @@ repos:
     hooks:
       - id: launch-depends
       - id: xml-schema
+      - id: clang-format
 ```
+
+Every hook that `nobleo-hooks` runs is available individually, with the Nobleo configuration (args, versions) built in:
+
+Note that providing your own `args:` replaces the Nobleo args.
 
 To skip specific hooks, use the `--skip` argument.
 For example if a different formatter is already configured.
@@ -172,8 +177,11 @@ jobs:
 
 ## Development
 
+All hooks are defined in `.pre-commit-hooks.yaml`.
+The `nobleo-hooks` hook runs every other hook in that file, from the same checkout, so a new hook is picked up automatically.
+
 To test the pre-commit configuration, run the following command:
 
 ```bash
-pre-commit try-repo /path/to/nobleo-pre-commit --all-files --verbose
+prek try-repo /path/to/nobleo-pre-commit nobleo-hooks --all-files --verbose
 ```
