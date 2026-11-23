@@ -95,7 +95,7 @@
   types_or: [c++, c, c#, cuda, java, javascript, json, objective-c, proto, textproto, metal]
   exclude: \.ipynb$  # Until: https://github.com/pre-commit/mirrors-clang-format/pull/33 (LLVM v21.1.0)
   args:
-    - | # Identical to: https://github.com/ament/ament_lint/blob/HEAD/ament_clang_format/ament_clang_format/configuration/.clang-format
+    - | # Based on (plus include grouping): https://github.com/ament/ament_lint/blob/HEAD/ament_clang_format/ament_clang_format/configuration/.clang-format
       --style={
         BasedOnStyle: Google,
         AccessModifierOffset: -2,
@@ -112,6 +112,12 @@
         ConstructorInitializerIndentWidth: 0,
         ContinuationIndentWidth: 2,
         DerivePointerAlignment: false,
+        IncludeCategories: [
+          {Regex: '^<[^./]+\.h>', Priority: 1},
+          {Regex: '^<[^.]+>', Priority: 2},
+          {Regex: '^".*', Priority: 4},
+          {Regex: '.*', Priority: 3}
+        ],
         PointerAlignment: Middle,
         ReflowComments: false
       }
